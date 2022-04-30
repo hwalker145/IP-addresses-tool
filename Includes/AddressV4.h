@@ -14,9 +14,9 @@ public:
     AddressV4(); // default constructor
     AddressV4(string add); // constructor with string
     AddressV4(int a, int b, int c, int d); // constructor
-        // with int specifying the chunks, probs won't use at all
+             // with int specifying the chunks
 
-    void setString(string add); // sets the whole address taking a string
+    void stringToChunks(string add); // sets the whole address taking a string
     void setChunk(int chunkNum, int chunkValue); // sets a specific
                                                  // chunk using an int
 

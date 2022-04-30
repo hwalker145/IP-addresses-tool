@@ -4,13 +4,16 @@
 // default constructor
 AddressV4::AddressV4()
 {
-    setString("0.0.0.0");
+    setChunk(0, 0);
+    setChunk(1, 0);
+    setChunk(2, 0);
+    setChunk(3, 0);
 }
 
 // constructor with a string to load into chunks with iss
 AddressV4::AddressV4(string add)
 {
-    setString(add);
+    stringToChunks(add);
 }
 
 // constructor with 4 integers
@@ -22,7 +25,7 @@ AddressV4::AddressV4(int a, int b, int c, int d)
     setChunk(3, d);
 }
 
-void AddressV4::setString(string add)
+void AddressV4::stringToChunks(string add)
 {
     istringstream istr; // initializes istr
 
@@ -43,15 +46,15 @@ void AddressV4::setString(string add)
 }
 
 // mutator using int
-void AddressV4::setChunk(int chunkNum, int chunkValue)
+void AddressV4::setChunk(int index, int val)
 {
-    mChunks[chunkNum] = chunkValue;
+    mChunks[index] = val;
 }
 
 // accessor returning integer, takes chunk index
-int AddressV4::getChunk(int chunkNum) const
+int AddressV4::getChunk(int index) const
 {
-    return mChunks[chunkNum];
+    return mChunks[index];
 }
 
 // returns the IP addy as a string using an ostringstream
@@ -70,5 +73,5 @@ string AddressV4::getString() const
 // destructor, all chunks to 0
 AddressV4::~AddressV4()
 {
-    setString("0.0.0.0");
+    stringToChunks("0.0.0.0");
 }
