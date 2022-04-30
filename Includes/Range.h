@@ -7,9 +7,16 @@ template <class T>
 class Range {
 public:
     bool isValid();
+
+    void setMask(int msk) {mask = msk;};
+    void setaddress(*T add) {address = add;};
+
+    *T getAddress() {return address;};
+    int getMask() {return mask;};
+
 private:
     int mask;
-    T address;
+    *T address, maxAddress;
 };
 
 #endif
