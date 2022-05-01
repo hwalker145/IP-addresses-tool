@@ -12,6 +12,7 @@ public:
     void setaddress(*T add) {address = add;};
 
     *T getAddress() {return address;};
+    *T getMaxAddress() {return maxAddress;};
     int getMask() {return mask;};
 
 private:
