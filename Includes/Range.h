@@ -8,11 +8,11 @@ class Range {
 public:
     bool isValid();
 
-    void setMask(int msk) {mask = msk;};
     void setaddress(*T add) {address = add;};
-
     *T getAddress() {return address;};
     *T getMaxAddress() {return maxAddress;};
+
+    void setMask(int msk) {mask = msk;};
     int getMask() {return mask;};
 
 private:

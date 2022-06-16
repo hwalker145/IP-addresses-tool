@@ -9,7 +9,6 @@
 
 #include "AddressV4.h"
 #include "AddressV6.h"
-#include "AddressRangeV4.h"
-#include "AddressRangeV6.h"
+#include "Range.h"
 
 #endif
