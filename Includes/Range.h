@@ -3,7 +3,7 @@
 
 #include "AddressV4.h"
 
-template <class T>
+template <typename T>
 class Range {
 public:
     bool isValid();
