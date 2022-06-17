@@ -9,11 +9,11 @@ public:
     bool isValid();
 
     void setaddress(*T add) {address = add;};
-    *T getAddress() {return address;};
-    *T getMaxAddress() {return maxAddress;};
+    *T getAddress() const {return address;};
+    *T getMaxAddress() const {return maxAddress;};
 
     void setMask(int msk) {mask = msk;};
-    int getMask() {return mask;};
+    int getMask() const {return mask;};
 
 private:
     int mask;
