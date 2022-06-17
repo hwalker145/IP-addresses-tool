@@ -6,7 +6,10 @@
 #include <sstream>  // to work with the dots and numbers
 #include <string>   // to work with sstream
 
-using namespace std;
+using std::istringstream;
+using std::ostringstream;
+using std::string;
+using std::cout;
 
 class AddressV4 // our class to be an IP address
 {

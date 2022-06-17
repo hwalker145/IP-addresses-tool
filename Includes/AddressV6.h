@@ -7,7 +7,11 @@
 #include <string>   // to work with sstream
 #include <iomanip>  // to bring an integer back to hex
 
-using namespace std;
+using std::istringstream;
+using std::ostringstream;
+using std::string;
+using std::hex;
+using std::cout;
 
 class AddressV6 // our class to be an IP address
 {

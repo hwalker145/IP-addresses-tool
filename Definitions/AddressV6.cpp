@@ -5,7 +5,10 @@
 #include <string>   // to work with sstream
 #include <iomanip>  // to use hex strings and integers
 
-using namespace std;
+using std::istringstream;
+using std::string;
+using std::stoi;
+using std::hex;
 
 // default constructor
 AddressV6::AddressV6()
