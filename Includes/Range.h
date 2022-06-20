@@ -7,11 +7,18 @@
 template <typename T>
 class Range {
 public:
-    Range();
-    Range(T* ptr, int mask);
-    bool isValid();
+    // called before instantiation
+    static bool isValid(T*, int);
 
-    void setAddress(T* add) {address = &add;};
+    Range();
+    Range(T*, int);
+    T* findMax();
+
+    void setAddress(T* add) {address = add;};
+    // a wrapper to use on the generated address from Range::findMax
+    // not 100p necessary I guess
+
+    void setMaxAddress(T* add) {maxAddress = add;};
     T* getAddress() const {return address;};
     T* getMaxAddress() const {return maxAddress;};
 

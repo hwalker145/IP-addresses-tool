@@ -2,14 +2,18 @@
 
 using std::cerr;
 
-Range<AddressV4>::Range()
+template<typename T>
+Range<T>::Range()
 {
-    setAddress(new AddressV4);
+    setAddress(new T);
     setMask(0);
 }
 
-Range<AddressV6>::Range()
+template<typename T>
+Range<T>::Range(T* ptr, int msk)
 {
-    setAddress(new AddressV6);
-    setMask(0);
+    setAddress(ptr);
+    setMask(msk);
+
+    findMax();
 }
