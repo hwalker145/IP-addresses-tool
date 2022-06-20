@@ -2,21 +2,14 @@
 
 using std::cerr;
 
-template<typename T>
-Range<T>::Range()
+Range<AddressV4>::Range()
 {
-    int version = 0;
-    if(typeid(T).name() == AddressV4)
-    {
-        version = 4;
-    }
-    else if(typeid(T).name() == AddressV6)
-    {
-        version = 6;
-    }
-    else
-    {
-        cerr << "Coder input invalid Range template type.\n"
-             << "Use either AddressV4 or AddressV6.";
-    }
+    setAddress(new AddressV4);
+    setMask(0);
+}
+
+Range<AddressV6>::Range()
+{
+    setAddress(new AddressV6);
+    setMask(0);
 }

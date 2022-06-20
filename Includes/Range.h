@@ -11,7 +11,7 @@ public:
     Range(T* ptr, int mask);
     bool isValid();
 
-    void setaddress(T* add) {address = &add;};
+    void setAddress(T* add) {address = &add;};
     T* getAddress() const {return address;};
     T* getMaxAddress() const {return maxAddress;};
 
