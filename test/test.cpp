@@ -2,13 +2,13 @@
 
 int main()
 {
-    Range<AddressV6> *A = new Range<AddressV6>("0:ee:ee:ee:0:0:0:0/10");
+    Range<AddressV6> *A = new Range<AddressV6>("0:ee:ee:ee:0:0:0:0000/63");
 
-    cout << "Stub 0000\n";
+    bool AValid = Range<AddressV6>::isValid(A);
 
-    cout << "The min address is: " << A->getAddress()->getChunkString(0) << "\n"
-         << "The subnet size is: " << A->getMask() << "\n"
-         << "The validity of this range is: " << Range<AddressV6>::isValid(A) << '\n';
+    cout << "The min address is: " << A->getAddress()->getString() << '\n'
+         << "The subnet size is: " << A->getMask() << '\n'
+         << "The validity of this range is: " << AValid << '\n';
 
     return 0;
 }

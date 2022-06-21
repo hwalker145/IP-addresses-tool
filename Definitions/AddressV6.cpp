@@ -42,11 +42,10 @@ void AddressV6::setString(string str)
     {
         getline(istr, temp, ':');
         len = temp.length();
-        cout << "Driver for string length: " << len << '\n';
         
         for(int j = 0; j < 4 - len; j++)
         {
-            temp = zero.append(temp);
+            temp = '0' + temp;
         }
 
         setChunk(i, temp);
@@ -56,7 +55,7 @@ void AddressV6::setString(string str)
     len = temp.length();
     for(int k = 0; k < 4 - len; k++)
     {
-        temp = zero.append(temp);
+        temp = '0' + temp;
     }
 
     setChunk(7, temp);
