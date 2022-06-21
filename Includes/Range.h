@@ -9,11 +9,36 @@ template <typename T>
 class Range {
 public:
     // called before instantiation
-    static bool isValid(T*, int);
+    static bool isValid(Range*);
 
-    Range(); // kind of dumb to ever call this one.
-    Range(string); // this one will be called most
-    Range(T*, int); // this one will be used indirectly
+    Range() // pretty useless
+    {
+        setAddress(new T);
+        setMask(0);
+    }
+
+    Range(string str) // this one will be called most
+    {
+        istringstream istr;
+        istr.str(str);
+
+        // used to pass in the address and mask
+        string tempStr;
+        int tempMsk;
+
+        getline(istr, tempStr, '/');
+        istr >> tempMsk;
+
+        setAddress(new T(tempStr));
+        setMask(tempMsk);
+    }
+
+    Range(T* ptr, int msk) // this one will be used indirectly
+    {
+        setAddress(ptr);
+        setMask(msk);
+    }
+
     T* findMax();
 
     void setAddress(T* add) {address = add;};

@@ -31,18 +31,35 @@ void AddressV6::setString(string str)
 
     istr.str(str); // loads string into istr
 
-    int chunkIndex = 0; // counter for the chunk we work on
     string temp; // temporary string to use std::getline
 
-    while(!istr.eof()) // validates to end of istr
+    string zero("0");
+
+    int len;
+
+    // i = 0, ... ,6
+    for(int i = 0; i < 7; i++)
     {
-        getline(istr, temp, ':'); // characters delimited 
-                                  // by ':' into temp
+        getline(istr, temp, ':');
+        len = temp.length();
+        cout << "Driver for string length: " << len << '\n';
+        
+        for(int j = 0; j < 4 - len; j++)
+        {
+            temp = zero.append(temp);
+        }
 
-        setChunk(chunkIndex, temp); // sets a chunk with temp, 
-
-        chunkIndex++; // increment counter
+        setChunk(i, temp);
     }
+    istr >> temp;
+
+    len = temp.length();
+    for(int k = 0; k < 4 - len; k++)
+    {
+        temp = zero.append(temp);
+    }
+
+    setChunk(7, temp);
 }
 
 // mutator using a string, 
