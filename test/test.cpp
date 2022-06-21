@@ -2,7 +2,7 @@
 
 int main()
 {
-    Range<AddressV4> *A = new Range<AddressV4>("0.3.0.0/16");
+    Range<AddressV4> *A = new Range<AddressV4>("1.255.8.0/15");
 
     bool AValid = Range<AddressV4>::isValid(A);
 

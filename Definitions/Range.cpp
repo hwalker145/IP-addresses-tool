@@ -4,7 +4,7 @@
  * @brief function finds mathematically if the address
  *      is compatible with the bitmask
  * 
- * @tparam  
+ * @tparam accepts type of address
  * @param ran range to be evaluated
  * @return true if range is valid
  * @return false if not
@@ -62,6 +62,15 @@ bool Range<AddressV6>::isValid(Range* ran)
     return true;
 }
 
+/**
+ * @brief finds out if the mask and the address are compatible...
+ *      much less difficult for V4
+ * 
+ * @tparam accepts type of address
+ * @param ran address range
+ * @return true if valid
+ * @return false if not
+ */
 template<>
 bool Range<AddressV4>::isValid(Range* ran)
 {
