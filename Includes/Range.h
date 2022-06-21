@@ -1,6 +1,7 @@
 #ifndef RANGE_H
 #define RANGE_H
 
+#include <cmath>
 #include "AddressV4.h"
 #include "AddressV6.h"
 
@@ -10,8 +11,9 @@ public:
     // called before instantiation
     static bool isValid(T*, int);
 
-    Range();
-    Range(T*, int);
+    Range(); // kind of dumb to ever call this one.
+    Range(string); // this one will be called most
+    Range(T*, int); // this one will be used indirectly
     T* findMax();
 
     void setAddress(T* add) {address = add;};

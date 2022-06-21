@@ -25,11 +25,11 @@ AddressV6::AddressV6(string add)
     setString(add);
 }
 
-void AddressV6::setString(string add)
+void AddressV6::setString(string str)
 {
     istringstream istr; // initialize istr
 
-    istr.str(add); // loads string into istr
+    istr.str(str); // loads string into istr
 
     int chunkIndex = 0; // counter for the chunk we work on
     string temp; // temporary string to use std::getline
@@ -45,7 +45,8 @@ void AddressV6::setString(string add)
     }
 }
 
-// mutator using a string
+// mutator using a string, 
+// my setters/getters are not inline cause they're too long
 void AddressV6::setChunk(int chunkNum, string chunkValue)
 {
     mChunksString[chunkNum] = chunkValue; // standard mutator
@@ -66,6 +67,7 @@ const string AddressV6::getChunkString(int chunkNum)
 }
 
 // accessor, returns an integer
+// returns huge number, don't use yet
 const int AddressV6::getChunkInteger(int chunkNum)
 {
     // stoi with base 16

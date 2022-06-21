@@ -12,12 +12,13 @@ using std::ostringstream;
 using std::string;
 using std::hex;
 using std::cout;
+using std::getline;
 
 class AddressV6 // our class to be an IP address
 {
 public:
     AddressV6(); // default constructor, all chunks 0
-    AddressV6(string add); // constructs with string, using istringstream
+    AddressV6(string); // constructs with string, using istringstream
 
     void setString(string add); // sets the whole address from a string
     void setChunk(int chunkNum, string chunkValue); // sets single chunk
