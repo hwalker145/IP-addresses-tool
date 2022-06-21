@@ -2,9 +2,9 @@
 
 int main()
 {
-    Range<AddressV6> *A = new Range<AddressV6>("0:ee:ee:ee:0:0:0:0000/63");
+    Range<AddressV4> *A = new Range<AddressV4>("0.3.0.0/16");
 
-    bool AValid = Range<AddressV6>::isValid(A);
+    bool AValid = Range<AddressV4>::isValid(A);
 
     cout << "The min address is: " << A->getAddress()->getString() << '\n'
          << "The subnet size is: " << A->getMask() << '\n'
