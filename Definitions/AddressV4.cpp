@@ -38,10 +38,8 @@ void AddressV4::stringToChunks(string add)
     {
         getline(istr, temp, '.'); // takes delimited input
 
-        setChunk(ctr, stoi(temp)); // casts into integer
+        setChunk(ctr++, stoi(temp)); // casts into integer
                         // and mutates the chunks
-
-        ctr++; // increments counter
     }
 }
 

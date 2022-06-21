@@ -36,9 +36,10 @@ void AddressV6::setString(string str)
     string zero("0");
 
     int len;
+    int i = 0;
 
     // i = 0, ... ,6
-    for(int i = 0; i < 7; i++)
+    while(!istr.eof())
     {
         getline(istr, temp, ':');
         len = temp.length();
@@ -48,17 +49,8 @@ void AddressV6::setString(string str)
             temp = '0' + temp;
         }
 
-        setChunk(i, temp);
+        setChunk(i++, temp);
     }
-    istr >> temp;
-
-    len = temp.length();
-    for(int k = 0; k < 4 - len; k++)
-    {
-        temp = '0' + temp;
-    }
-
-    setChunk(7, temp);
 }
 
 // mutator using a string, 

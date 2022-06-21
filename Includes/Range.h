@@ -52,6 +52,14 @@ public:
     void setMask(int msk) {mask = msk;};
     int getMask() const {return mask;};
 
+    ~Range()
+    {
+        delete address;
+        delete maxAddress;
+
+        address = maxAddress = nullptr;
+    }
+
 private:
     int mask;
     T* address, maxAddress;

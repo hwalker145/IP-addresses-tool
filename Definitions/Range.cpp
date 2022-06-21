@@ -14,7 +14,7 @@ bool Range<AddressV6>::isValid(Range* ran)
     // we start with the character needed
 
     int charValue = stoi(ran->getAddress()->getChunkString(7 - chunkIndex).substr(3 - charIndex, 1), nullptr, 16);
-    cout << charValue << '\n';
+    
     if(charValue % (int)pow(2, (ran->getMask() % 4)))
     {  
         return false;
@@ -26,7 +26,6 @@ bool Range<AddressV6>::isValid(Range* ran)
     {
         if(stoi(ran->getAddress()->getChunkString(7 - chunkIndex).substr(i, 1), nullptr, 16))
         {
-            cout << "Stub 0001\n";
             return false;
         }
     }
