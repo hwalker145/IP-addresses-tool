@@ -8,7 +8,7 @@
 template <typename T>
 class Range {
 public:
-    // called before instantiation
+    // can be called statically
     static bool isValid(Range*);
 
     Range() // pretty useless
