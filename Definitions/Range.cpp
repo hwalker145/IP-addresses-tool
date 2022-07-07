@@ -46,7 +46,7 @@ bool Range<AddressV6>::isValid(Range* ran)
     // to the least significant chunk
     for(int j = chunkIndex; j > 0; j--)
     {
-        if(ran->getAddress()->getChunkString(8 - chunkIndex) == "")
+        if(ran->getAddress()->getChunkString(8 - chunkIndex) == L"")
         {
             // we ignore it if it's empty ... though not necessary given
             // we don't have empty chunks right now

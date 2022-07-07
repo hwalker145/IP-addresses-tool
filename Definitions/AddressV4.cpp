@@ -11,7 +11,7 @@ AddressV4::AddressV4()
 }
 
 // constructor with a string to load into chunks with iss
-AddressV4::AddressV4(string add)
+AddressV4::AddressV4(wstring add)
 {
     stringToChunks(add);
 }
@@ -25,18 +25,18 @@ AddressV4::AddressV4(int a, int b, int c, int d)
     setChunk(3, d);
 }
 
-void AddressV4::stringToChunks(string add)
+void AddressV4::stringToChunks(wstring add)
 {
-    istringstream istr; // initializes istr
+    wistringstream istr; // initializes istr
 
     istr.str(add); // loads string into istr
 
-    string temp; // temporary string for getline to use
+    wstring temp; // temporary string for getline to use
     int ctr = 0; // counter int to change the chunk
 
     while(!istr.eof()) // validates istr as continuous
     {
-        getline(istr, temp, '.'); // takes delimited input
+        getline(istr, temp, L'.'); // takes delimited input
 
         setChunk(ctr++, stoi(temp)); // casts into integer
                         // and mutates the chunks
@@ -56,9 +56,9 @@ int AddressV4::getChunk(int index) const
 }
 
 // returns the IP addy as a string using an ostringstream
-string AddressV4::getString() const
+wstring AddressV4::getString() const
 {
-    ostringstream ostr; // initializes ostr
+    wostringstream ostr; // initializes ostr
 
     ostr << getChunk(0) << '.' // puts a period
          << getChunk(1) << '.' // between chunks
@@ -71,5 +71,5 @@ string AddressV4::getString() const
 // destructor, all chunks to 0
 AddressV4::~AddressV4()
 {
-    stringToChunks("0.0.0.0");
+    stringToChunks(L"0.0.0.0");
 }

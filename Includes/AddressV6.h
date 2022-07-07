@@ -7,30 +7,30 @@
 #include <string>   // to work with sstream
 #include <iomanip>  // to bring an integer back to hex
 
-using std::istringstream;
-using std::ostringstream;
-using std::string;
+using std::wistringstream;
+using std::wostringstream;
+using std::wstring;
 using std::hex;
-using std::cout;
+using std::wcout;
 using std::getline;
 
 class AddressV6 // our class to be an IP address
 {
 public:
     AddressV6(); // default constructor, all chunks 0
-    AddressV6(string); // constructs with string, using istringstream
+    AddressV6(wstring); // constructs with string, using istringstream
 
-    void setString(string add); // sets the whole address from a string
-    void setChunk(int chunkNum, string chunkValue); // sets single chunk
+    void setString(wstring add); // sets the whole address from a string
+    void setChunk(int chunkNum, wstring chunkValue); // sets single chunk
     void setChunk(int chunkNum, int chunkValue); // sets the chunk as int
 
     const int getChunkInteger(int chunkNum); // returns as an integer
-    const string getChunkString(int chunkNum); // returns as a string
-    const string getString(); // returns the string of the address
+    const wstring getChunkString(int chunkNum); // returns as a string
+    const wstring getString(); // returns the string of the address
 
     ~AddressV6(); // destructor, all chunks to 0
 private:
-    string mChunksString[8];
+    wstring mChunksString[8];
 };
 
 #endif

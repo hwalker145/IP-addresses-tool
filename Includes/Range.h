@@ -17,16 +17,16 @@ public:
         setMask(0);
     }
 
-    Range(string str) // this one will be called most
+    Range(wstring str) // this one will be called most
     {
-        istringstream istr;
+        wistringstream istr;
         istr.str(str);
 
         // used to pass in the address and mask
-        string tempStr;
+        wstring tempStr;
         int tempMsk;
 
-        getline(istr, tempStr, '/');
+        getline(istr, tempStr, L'/');
         istr >> tempMsk;
 
         setAddress(new T(tempStr));
