@@ -54,37 +54,34 @@ int main(int argc, char** argv) {
 			throw std::runtime_error("No column had 'subnet' or 'Subnet' or 'SubNet' as header\n");
 		}
 
-		void* ptr = nullptr;
-
 		wstring firstAdd = sh->readStr(1, subnetCol);
+
+		int addType = -1;
+
 		for (int i = 1; i < 5; i++)
 		{
 			if (firstAdd[i] == L'.')
 			{  
-				reinterpret_cast<Range<AddressV4>*>(ptr);
-				ptr = new Range<AddressV4>(firstAdd);
+				addType = 4;
 				break;
 			}
 			if (firstAdd[i] == L':')
 			{			
-				reinterpret_cast<Range<AddressV6>*>(ptr);
-				ptr = new Range<AddressV6>(firstAdd);
+				addType = 6;
 				break;
 			}
 		}
 
-		if(typeid(ptr).name() != "AddressV4" && typeid(ptr).name() != "AddressV6")
-		{
-			throw std::runtime_error("Address does not contain delimiter\n");
-		}
-		else
-		{
-			Range<AddressV4>* ran = new Range<AddressV4>(firstAdd);
-			wcout << "Address at the top of the subnet column:\n"
-				  << ran->getAddress()->getString() << '\n';
-		}
+		wcout << "Address at the top of the subnet column:\n";
 
-		
+		switch (addType)
+		{
+		case 4: wcout << (new Range<AddressV4>(firstAdd))->getAddress()->getString();
+			break;
+		case 6: wcout << (new Range<AddressV6>(firstAdd))->getAddress()->getString();
+			break;
+		default: throw std::runtime_error("ERROR: no delimiter detected or no valid instantiation...\n");
+		}
 	}
 
 	catch (std::invalid_argument& ia)

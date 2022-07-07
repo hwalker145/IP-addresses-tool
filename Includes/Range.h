@@ -57,12 +57,13 @@ public:
         delete address;
         delete maxAddress;
 
-        address = maxAddress = nullptr;
+        address = nullptr;
+        maxAddress = nullptr;
     }
 
 private:
     int mask;
-    T* address, maxAddress;
+    T *address, *maxAddress;
 };
 
 #endif
