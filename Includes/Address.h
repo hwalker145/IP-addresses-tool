@@ -1,3 +1,11 @@
+/*****************************************************************//**
+ * \file   Address.h
+ * \brief  
+ * 
+ * \author walkerh4
+ * \date   July 2022
+ *********************************************************************/
+
 #ifndef ADDRESS_H
 #define ADDRESS_H
 
@@ -5,6 +13,7 @@
 #include <cmath>
 #include <sstream>
 #include <string>
+#include <stdexcept>
 
 using std::wstring;
 using std::getline;
@@ -31,6 +40,9 @@ public:
 		version = 0;
 	}
 
+	int getVersion() const { return version; };
+	wstring getChunk(int c) const { return address[c]; };
+
 private:
 	int checkVersion(wstring str)
 	{
@@ -41,9 +53,6 @@ private:
 		}
 		return 0;
 	}
-
-	wstring getChunk(int c) const { return address[c]; };
-	int getVersion() const { return version; };
 
 	void setChunk(wstring c, int ci) { address[ci] = c; };
 	void setVersion(int v) { version = v; };

@@ -3,17 +3,17 @@
 
 #include <cmath>
 #include "AddressV4.h"
+#include "Address.h"
 #include "AddressV6.h"
 
-template <typename T>
 class Range {
 public:
     // can be called statically
-    static bool isValid(Range*);
+    bool isValid();
 
     Range() // pretty useless
     {
-        setAddress(new T);
+        setAddress(new Address);
         setMask(0);
     }
 
@@ -29,25 +29,25 @@ public:
         getline(istr, tempStr, L'/');
         istr >> tempMsk;
 
-        setAddress(new T(tempStr));
+        setAddress(new Address(tempStr));
         setMask(tempMsk);
     }
 
-    Range(T* ptr, int msk) // this one will be used indirectly
+    Range(Address* ptr, int msk) // this one will be used indirectly
     {
         setAddress(ptr);
         setMask(msk);
     }
 
-    T* findMax();
+    Address* findMax();
 
-    void setAddress(T* add) {address = add;};
+    void setAddress(Address* add) {address = add;};
     // a wrapper to use on the generated address from Range::findMax
     // not 100p necessary I guess
 
-    void setMaxAddress(T* add) {maxAddress = add;};
-    T* getAddress() const {return address;};
-    T* getMaxAddress() const {return maxAddress;};
+    void setMaxAddress(Address* add) {maxAddress = add;};
+    Address* getAddress() const {return address;};
+    Address* getMaxAddress() const {return maxAddress;};
 
     void setMask(int msk) {mask = msk;};
     int getMask() const {return mask;};
@@ -63,7 +63,7 @@ public:
 
 private:
     int mask;
-    T *address, *maxAddress;
+    Address *address, *maxAddress;
 };
 
 #endif
