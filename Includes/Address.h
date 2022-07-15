@@ -14,12 +14,7 @@
 #include <sstream>
 #include <string>
 #include <stdexcept>
-
-using std::wstring;
-using std::getline;
-using std::wostringstream;
-using std::wistringstream;
-using std::stoi;
+#include <iomanip>
 
 class Address {
 public:
@@ -29,9 +24,9 @@ public:
 		version = 0;
 	}
 
-	Address(wstring);
+	Address(std::wstring);
 
-	wstring asString() const;
+	std::wstring asString() const;
 
 	~Address()
 	{
@@ -40,13 +35,13 @@ public:
 		version = 0;
 	}
 
-	int getVersion() const { return version; };
-	wstring getChunk(int c) const { return address[c]; };
+	size_t getVersion() const { return version; };
+	size_t getChunk(size_t c) const { return address[c]; };
 
 private:
-	int checkVersion(wstring str)
+	int checkVersion(std::wstring str)
 	{
-		for (int i = 1; i < 5; i++)
+		for (size_t i = 1; i < 5; i++)
 		{
 			if (str[i] == L'.') { return 4; };
 			if (str[i] == L':') { return 6; };
@@ -54,11 +49,11 @@ private:
 		return 0;
 	}
 
-	void setChunk(wstring c, int ci) { address[ci] = c; };
-	void setVersion(int v) { version = v; };
+	void setChunk(size_t c, size_t ci) { address[ci] = c; };
+	void setVersion(size_t v) { version = v; };
 
 	int version;
-	wstring* address;
+	size_t* address;
 };
 
 #endif

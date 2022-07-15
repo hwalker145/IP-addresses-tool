@@ -13,37 +13,40 @@
  * 
  * param str is the wstring
  */
-Address::Address(wstring str)
+Address::Address(std::wstring str)
 {
 	version = checkVersion(str);
 
-	int chunks = 0; 
+	size_t chunks = 0; 
+	size_t base = 0;
 	wchar_t del = L'\0';
 
-	if (version == 4) { chunks = 4; del = L'.'; }
-	else if (version == 6) { chunks = 8; del = L':'; }
+	if (version == 4) { chunks = 4; del = L'.'; base = 10; }
+	else if (version == 6) { chunks = 8; del = L':'; base = 16; }
 
-	address = new wstring[chunks];
+	address = new size_t[chunks];
 
-	wistringstream istr(str);
+	std::wistringstream istr(str);
+	std::wstring temp;
 
-	for (int i = 0; i < chunks; i++)
+	for (size_t i = 0; i < chunks; i++)
 	{
-		getline(istr, address[i], del);
+		getline(istr, temp, del);
+		address[i] = (size_t)stoi(temp, nullptr, base);
 	}
 }
 
-wstring Address::asString() const
+std::wstring Address::asString() const
 {
-	wostringstream ostr;
+	std::wostringstream ostr;
 
-	int chunks = 0;
+	size_t chunks = 0;
 	wchar_t del = L'\0';
 
 	if (version == 4) { chunks = 4; del = L'.'; }
 	else if (version == 6) { chunks = 8; del = L':'; }
 
-	for (int i = 0; i < chunks - 1; i++)
+	for (size_t i = 0; i < chunks - 1; i++)
 	{
 		ostr << address[i] << del;
 	}

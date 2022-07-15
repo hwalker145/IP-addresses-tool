@@ -2,6 +2,7 @@
 #define RANGE_H
 
 #include <cmath>
+#include <bitset>
 #include "AddressV4.h"
 #include "Address.h"
 #include "AddressV6.h"
@@ -24,19 +25,13 @@ public:
 
         // used to pass in the address and mask
         wstring tempStr;
-        int tempMsk;
+        size_t tempMsk;
 
         getline(istr, tempStr, L'/');
         istr >> tempMsk;
 
         setAddress(new Address(tempStr));
         setMask(tempMsk);
-    }
-
-    Range(Address* ptr, int msk) // this one will be used indirectly
-    {
-        setAddress(ptr);
-        setMask(msk);
     }
 
     Address* findMax();
@@ -49,8 +44,8 @@ public:
     Address* getAddress() const {return address;};
     Address* getMaxAddress() const {return maxAddress;};
 
-    void setMask(int msk) {mask = msk;};
-    int getMask() const {return mask;};
+    void setMask(size_t msk) {mask = msk;};
+    size_t getMask() const {return mask;};
 
     ~Range()
     {
@@ -62,7 +57,7 @@ public:
     }
 
 private:
-    int mask;
+    size_t mask, version;
     Address *address, *maxAddress;
 };
 
