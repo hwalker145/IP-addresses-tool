@@ -46,5 +46,5 @@ bool Range::isValid()
 			return false;
 		}
 	}
-
+	return true;
 }
