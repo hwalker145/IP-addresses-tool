@@ -57,7 +57,7 @@ public:
     }
 
 private:
-    size_t mask, version;
+    size_t mask;
     Address *address, *maxAddress;
 };
 
