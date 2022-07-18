@@ -18,16 +18,16 @@ public:
         setMask(0);
     }
 
-    Range(wstring str) // this one will be called most
+    Range(std::string str) // this one will be called most
     {
-        wistringstream istr;
+        std::istringstream istr;
         istr.str(str);
 
         // used to pass in the address and mask
-        wstring tempStr;
-        size_t tempMsk;
+        std::string tempStr;
+        int tempMsk;
 
-        getline(istr, tempStr, L'/');
+        getline(istr, tempStr, '/');
         istr >> tempMsk;
 
         setAddress(new Address(tempStr));
@@ -44,8 +44,8 @@ public:
     Address* getAddress() const {return address;};
     Address* getMaxAddress() const {return maxAddress;};
 
-    void setMask(size_t msk) {mask = msk;};
-    size_t getMask() const {return mask;};
+    void setMask(int msk) {mask = msk;};
+    int getMask() const {return mask;};
 
     ~Range()
     {
@@ -57,7 +57,7 @@ public:
     }
 
 private:
-    size_t mask;
+    int mask;
     Address *address, *maxAddress;
 };
 

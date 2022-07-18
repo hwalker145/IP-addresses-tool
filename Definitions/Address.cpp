@@ -13,40 +13,40 @@
  * 
  * param str is the wstring
  */
-Address::Address(std::wstring str)
+Address::Address(std::string str)
 {
 	version = checkVersion(str);
 
-	size_t chunks = 0; 
-	size_t base = 0;
-	wchar_t del = L'\0';
+	int chunks = 0; 
+	int base = 0;
+	char del = '\0';
 
-	if (version == 4) { chunks = 4; del = L'.'; base = 10; }
-	else if (version == 6) { chunks = 8; del = L':'; base = 16; }
+	if (version == 4) { chunks = 4; del = '.'; base = 10; }
+	else if (version == 6) { chunks = 8; del = ':'; base = 16; }
 
 	address = new size_t[chunks];
 
-	std::wistringstream istr(str);
-	std::wstring temp;
+	std::istringstream istr(str);
+	std::string temp;
 
-	for (size_t i = 0; i < chunks; i++)
+	for (int i = 0; i < chunks; i++)
 	{
 		getline(istr, temp, del);
 		address[i] = (size_t)stoi(temp, nullptr, base);
 	}
 }
 
-std::wstring Address::asString() const
+std::string Address::asString() const
 {
-	std::wostringstream ostr;
+	std::ostringstream ostr;
 
-	size_t chunks = 0;
-	wchar_t del = L'\0';
+	int chunks = 0;
+	char del = L'\0';
 
 	if (version == 4) { chunks = 4; del = L'.'; }
 	else if (version == 6) { chunks = 8; del = L':'; }
 
-	for (size_t i = 0; i < chunks - 1; i++)
+	for (int i = 0; i < chunks - 1; i++)
 	{
 		ostr << address[i] << del;
 	}

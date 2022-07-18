@@ -24,9 +24,9 @@ public:
 		version = 0;
 	}
 
-	Address(std::wstring);
+	Address(std::string);
 
-	std::wstring asString() const;
+	std::string asString() const;
 
 	~Address()
 	{
@@ -35,22 +35,22 @@ public:
 		version = 0;
 	}
 
-	size_t getVersion() const { return version; };
-	size_t getChunk(size_t c) const { return address[c]; };
+	int getVersion() const { return version; };
+	size_t getChunk(int c) const { return address[c]; };
 
 private:
-	int checkVersion(std::wstring str)
+	int checkVersion(std::string str)
 	{
-		for (size_t i = 1; i < 5; i++)
+		for (int i = 1; i < 5; i++)
 		{
-			if (str[i] == L'.') { return 4; };
-			if (str[i] == L':') { return 6; };
+			if (str[i] == '.') { return 4; };
+			if (str[i] == ':') { return 6; };
 		}
 		return 0;
 	}
 
-	void setChunk(size_t c, size_t ci) { address[ci] = c; };
-	void setVersion(size_t v) { version = v; };
+	void setChunk(int c, int ci) { address[ci] = c; };
+	void setVersion(int v) { version = v; };
 
 	int version;
 	size_t* address;

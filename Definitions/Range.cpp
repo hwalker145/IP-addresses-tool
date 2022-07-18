@@ -2,9 +2,9 @@
 
 bool Range::isValid()
 {
-	size_t chunks = 0;
-	size_t chsize = 0;
-	size_t chindex = -1;
+	int chunks = 0;
+	int chsize = 0;
+	int chindex = -1;
 
 	if (!getMask())
 	{
@@ -12,16 +12,8 @@ bool Range::isValid()
 		return true;
 	}
 
-	if (getAddress()->getVersion() == 6)
-	{
-		chunks = 8;
-		chsize = 16;
-	}
-	else if (getAddress()->getVersion() == 4)
-	{
-		chunks = 4;
-		chsize = 8;
-	}
+	if (getAddress()->getVersion() == 6) { chunks = 8; chsize = 16; }
+	else if (getAddress()->getVersion() == 4) { chunks = 4; chsize = 8;	}
 	else
 	{
 		// maybe include a logging function?
@@ -30,21 +22,15 @@ bool Range::isValid()
 
 	chindex = (getMask() - 1) / chsize;
 
-	for (size_t i = chindex + 1; i < chunks; i++)
+	for (int i = chindex + 1; i < chunks; i++)
 	{
-		if (getAddress()->getChunk(i))
-		{
-			return false;
-		}
+		if (getAddress()->getChunk(i)) { return false; }
 	}
 
 	std::bitset<16> chSet(getAddress()->getChunk(chindex));
-	for (size_t i = getMask() % chsize; i < chsize; i++)
+	for (int i = getMask() % chsize; i < chsize; i++)
 	{
-		if (chSet[i])
-		{
-			return false;
-		}
+		if (chSet[i]) { return false; }
 	}
 	return true;
 }

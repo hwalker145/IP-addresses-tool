@@ -7,9 +7,12 @@ int main()
 	try 
 	{
 		Book* B = xlCreateXMLBook();
-
+		if (!B->load("../xlsx/IP Ranges Sample.xlsx"))
+		{
+			throw B->errorMessage();
+		}
 	}
-	catch (wchar_t * exception)
+	catch (char* exception)
 	{
 		exit(1);
 	}
