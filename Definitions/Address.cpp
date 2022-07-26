@@ -29,11 +29,13 @@ Address::Address(std::string str)
 	std::istringstream istr(str);
 	std::string temp;
 
-	for (int i = 0; i < chunks; i++)
+	for (int i = 0; i < chunks - 1; i++)
 	{
 		getline(istr, temp, del);
 		address[i] = (size_t)stoi(temp, nullptr, base);
 	}
+	getline(istr, temp);
+	address[chunks - 1] = (size_t)stoi(temp, nullptr, base);
 }
 
 std::string Address::asString() const
@@ -44,13 +46,14 @@ std::string Address::asString() const
 	char del = L'\0';
 
 	if (version == 4) { chunks = 4; del = L'.'; }
-	else if (version == 6) { chunks = 8; del = L':'; }
+	else if (version == 6) { chunks = 8; del = L':'; ostr << std::hex; }
+
 
 	for (int i = 0; i < chunks - 1; i++)
 	{
 		ostr << address[i] << del;
 	}
-	ostr << address[chunks];
+	ostr << address[chunks - 1];
 
 	return ostr.str();
 }

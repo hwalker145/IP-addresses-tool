@@ -8,7 +8,6 @@ bool Range::isValid()
 
 	if (!getMask())
 	{
-		// log something about this
 		return true;
 	}
 
@@ -16,8 +15,7 @@ bool Range::isValid()
 	else if (getAddress()->getVersion() == 4) { chunks = 4; chsize = 8;	}
 	else
 	{
-		// maybe include a logging function?
-		throw std::runtime_error("No version found for IP address range.\n");
+		throw std::runtime_error("No valid version found for IP address range.\n");
 	}
 
 	chindex = (getMask() - 1) / chsize;
@@ -27,10 +25,9 @@ bool Range::isValid()
 		if (getAddress()->getChunk(i)) { return false; }
 	}
 
-	std::bitset<16> chSet(getAddress()->getChunk(chindex));
-	for (int i = getMask() % chsize; i < chsize; i++)
+	if (getAddress()->getChunk(chindex) & ((1 << chsize - (getMask() % chsize)) - 1))
 	{
-		if (chSet[i]) { return false; }
+		return false;
 	}
 	return true;
 }
