@@ -37,6 +37,9 @@ public:
 
 	int getVersion() const { return version; };
 	size_t getChunk(int c) const { return address[c]; };
+	void setChunk(int c, int ci) { address[ci] = c; };
+
+	int addCmp(Address*);
 
 private:
 	int checkVersion(std::string str)
@@ -49,7 +52,6 @@ private:
 		return 0;
 	}
 
-	void setChunk(int c, int ci) { address[ci] = c; };
 	void setVersion(int v) { version = v; };
 
 	int version;
