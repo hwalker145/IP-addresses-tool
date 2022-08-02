@@ -9,10 +9,10 @@
 #ifndef ADDRESS_H
 #define ADDRESS_H
 
+#include "setup.h"
+
 #include <iostream>
 #include <cmath>
-#include <sstream>
-#include <string>
 #include <stdexcept>
 #include <iomanip>
 
@@ -24,9 +24,9 @@ public:
 		version = 0;
 	}
 
-	Address(std::string);
+	Address(_TSTR);
 
-	std::string asString() const;
+	_TSTR asString() const;
 
 	~Address()
 	{
@@ -42,12 +42,12 @@ public:
 	int addCmp(Address*);
 
 private:
-	int checkVersion(std::string str)
+	int checkVersion(_TSTR str)
 	{
 		for (int i = 1; i < 5; i++)
 		{
-			if (str[i] == '.') { return 4; };
-			if (str[i] == ':') { return 6; };
+			if (str[i] == (_TCHAR)'.') { return 4; };
+			if (str[i] == (_TCHAR)':') { return 6; };
 		}
 		return 0;
 	}

@@ -2,7 +2,6 @@
 #define RANGE_H
 
 #include <cmath>
-#include <bitset>
 #include "Address.h"
 
 class Range {
@@ -16,13 +15,13 @@ public:
         setMask(0);
     }
 
-    Range(std::string str) // this one will be called most
+    Range(_TSTR str) // this one will be called most
     {
-        std::istringstream istr;
+        _TISTR istr;
         istr.str(str);
 
         // used to pass in the address and mask
-        std::string tempStr;
+        _TSTR tempStr;
         int tempMsk;
 
         getline(istr, tempStr, '/');

@@ -1,5 +1,6 @@
 #include "../Includes/IPAddress.h"
 
+
 int main()
 {
     Range<AddressV4> *A = new Range<AddressV4>("1.255.8.0/15");
