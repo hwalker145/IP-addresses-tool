@@ -37,7 +37,7 @@ public:
 
 	int getVersion() const { return version; };
 	size_t getChunk(int c) const { return address[c]; };
-	void setChunk(int c, int ci) { address[ci] = c; };
+	void setChunk(size_t c, int ci) { address[ci] = c; };
 
 	int addCmp(Address*);
 

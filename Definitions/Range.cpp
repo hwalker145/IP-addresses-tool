@@ -15,7 +15,7 @@ Address* Range::findMax() {
 
 	chindex = (getMask() - 1) / chsize;
 
-	add->setChunk(add->getChunk(chindex) + (1 << (chsize - (getMask() % chsize))) - 1, chindex);
+	add->setChunk(add->getChunk(chindex) + ((size_t)1 << (chsize - (getMask() % chsize))) - 1, chindex);
 
 	for(int i = chindex + 1; i < chunks; i++) {
 		add->setChunk((1 << chsize) - 1, i);
@@ -46,7 +46,7 @@ bool Range::isValid() {
 		if (getAddress()->getChunk(i)) { return false; }
 	}
 
-	if (getAddress()->getChunk(chindex) & ((1 << (chsize - (getMask() % chsize))) - 1)) {
+	if (getAddress()->getChunk(chindex) & (((size_t)1 << (chsize - (getMask() % chsize))) - 1)) {
 		return false;
 	}
 	return true;
