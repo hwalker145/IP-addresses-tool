@@ -37,13 +37,21 @@ Address::Address(_TSTR str) {
 }
 
 _TSTR Address::asString() const {
+	#ifdef _UNICODE
+		constexpr _TCHAR _TCOLON = L':';
+		constexpr _TCHAR _TCOMMA = L',';
+	#else 
+		constexpr _TCHAR _TCOLON = ':';
+		constexpr _TCHAR _TCOMMA = ','; 
+	#endif
+
 	_TOSTR ostr;
 
 	int chunks = 0;
-	_TCHAR del = (_TCHAR)'\0';
+	_TCHAR del = (_TCHAR)NULL;
 
-	if (version == 4) { chunks = 4; del = L'.'; }
-	else if (version == 6) { chunks = 8; del = L':'; ostr << std::hex; }
+	if (version == 4) { chunks = 4; del = _TCOMMA; }
+	else if (version == 6) { chunks = 8; del = _TCOLON; ostr << std::hex; }
 
 
 	for (int i = 0; i < chunks - 1; i++) {

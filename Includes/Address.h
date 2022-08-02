@@ -44,10 +44,18 @@ public:
 private:
 	int checkVersion(_TSTR str)
 	{
+		#ifdef _UNICODE
+			constexpr _TCHAR _TCOLON = L':';
+			constexpr _TCHAR _TCOMMA = L',';
+		#else 
+			constexpr _TCHAR _TCOLON = ':';
+			constexpr _TCHAR _TCOMMA = ',';
+		#endif
+
 		for (int i = 1; i < 5; i++)
 		{
-			if (str[i] == (_TCHAR)'.') { return 4; };
-			if (str[i] == (_TCHAR)':') { return 6; };
+			if (str[i] == _TCOMMA) { return 4; };
+			if (str[i] == _TCOLON) { return 6; };
 		}
 		return 0;
 	}
