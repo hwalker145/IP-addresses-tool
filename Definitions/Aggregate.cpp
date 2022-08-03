@@ -10,7 +10,7 @@ bool comparator(Range* a, Range* b) {
 
 /**
  * Function is a major part of the program and aggregates all 
- * found IP ranges into one xlsx file. Does not throw errors,
+ * found IP ranges into one new xlsx file. Does not throw errors,
  * ignores them.
  * 
  * \param b -- book to search
@@ -45,9 +45,27 @@ void aggregateRanges(Book* b) {
 
 	std::sort(ranVec.begin(), ranVec.end(), comparator);
 
-	bool contLoop = 1;
+	bool contLoop = true;
 
 	while (contLoop) {
-		;
+		contLoop = false;
+
+		for (int i = 0; i < ranVec.size() - 1; i++) {
+			if (ranVec[i] == nullptr) { continue; }
+			if (ranVec[i]->canMerge(ranVec[i + 1])) {
+				delete ranVec[i + 1];
+				ranVec[i + 1] = nullptr;
+
+				ranVec[i]->setMask(ranVec[i]->getMask() - 1);
+
+				contLoop = true;
+			}
+		}
+
+		for (int i = 0; i < ranVec.size(); i++) {
+			if (ranVec[i] != nullptr) {
+				std::cout << ranVec[i]->getAddress()->asString() << _TSLASH << ranVec[i]->getMask() << '\n';
+			}
+		}
 	}
 }
