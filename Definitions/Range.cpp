@@ -68,8 +68,8 @@ bool Range::canMerge(Range* ran) {
 
 	chindex = (getMask() - 1) / chsize;
 
-	if (((getAddress()->getChunk(chindex) >> (chsize - (getMask() % chsize))) & (size_t)1) !=
-		((ran->getAddress()->getChunk(chindex) >> (chsize - (getMask() % chsize))) & (size_t)1)) {
+	if (((getAddress()->getChunk(chindex) >> (chsize - ((getMask() - 1) % chsize) - 1)) & (size_t)1) !=
+		((ran->getAddress()->getChunk(chindex) >> (chsize - ((getMask() - 1) % chsize) - 1)) & (size_t)1)) {
 		return true;
 	}
 
