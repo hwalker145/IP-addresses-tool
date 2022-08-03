@@ -6,12 +6,14 @@
 
 class Range {
 public:
-    // can be called statically
     bool isValid();
+
+    bool canMerge(Range*);
 
     Range() // pretty useless
     {
-        setAddress(new Address);
+        setAddress(new Address("0.0.0.0"));
+        setMaxAddress(nullptr);
         setMask(0);
     }
 
@@ -24,7 +26,7 @@ public:
         _TSTR tempStr;
         int tempMsk;
 
-        getline(istr, tempStr, '/');
+        getline(istr, tempStr, _TSLASH);
         istr >> tempMsk;
 
         setAddress(new Address(tempStr));

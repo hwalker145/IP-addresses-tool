@@ -31,7 +31,7 @@ bool Range::isValid() {
 
 	if (!getMask())
 	{
-		return true;
+		return false;
 	}
 
 	if (getAddress()->getVersion() == 6) { chunks = 8; chsize = 16; }
@@ -50,4 +50,28 @@ bool Range::isValid() {
 		return false;
 	}
 	return true;
+}
+
+bool Range::canMerge(Range* ran) {
+	if (getMask() != ran->getMask()) { return false; }
+	if (getAddress()->getVersion() != ran->getAddress()->getVersion()) { return false; }
+
+	int chindex = -1;
+	int chunks = 0;
+	int chsize = 0;
+
+	if (getAddress()->getVersion() == 6) { chunks = 8; chsize = 16; }
+	else if (getAddress()->getVersion() == 4) { chunks = 4; chsize = 8; }
+	else {
+		throw std::runtime_error("No valid version found for IP address range.\n");
+	}
+
+	chindex = (getMask() - 1) / chsize;
+
+	if (((getAddress()->getChunk(chindex) >> (chsize - (getMask() % chsize))) & (size_t)1) !=
+		((ran->getAddress()->getChunk(chindex) >> (chsize - (getMask() % chsize))) & (size_t)1)) {
+		return true;
+	}
+
+	return false;
 }

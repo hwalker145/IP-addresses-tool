@@ -14,14 +14,14 @@
  * param str is the wstring
  */
 Address::Address(_TSTR str) {
-	version = checkVersion(str);
+	checkVersion(str);
 
 	int chunks = 0; 
 	int base = 0;
 	_TCHAR del = (_TCHAR)'\0';
 
-	if (version == 4) { chunks = 4; del = '.'; base = 10; }
-	else if (version == 6) { chunks = 8; del = ':'; base = 16; }
+	if (getVersion() == 4) { chunks = 4; del = '.'; base = 10; }
+	else if (getVersion() == 6) { chunks = 8; del = ':'; base = 16; }
 
 	address = new size_t[chunks];
 
@@ -39,10 +39,10 @@ Address::Address(_TSTR str) {
 _TSTR Address::asString() const {
 	#ifdef _UNICODE
 		constexpr _TCHAR _TCOLON = L':';
-		constexpr _TCHAR _TCOMMA = L',';
+		constexpr _TCHAR _TPERIOD = L'.';
 	#else 
 		constexpr _TCHAR _TCOLON = ':';
-		constexpr _TCHAR _TCOMMA = ','; 
+		constexpr _TCHAR _TPERIOD = '.'; 
 	#endif
 
 	_TOSTR ostr;
@@ -50,7 +50,7 @@ _TSTR Address::asString() const {
 	int chunks = 0;
 	_TCHAR del = (_TCHAR)NULL;
 
-	if (version == 4) { chunks = 4; del = _TCOMMA; }
+	if (version == 4) { chunks = 4; del = _TPERIOD; }
 	else if (version == 6) { chunks = 8; del = _TCOLON; ostr << std::hex; }
 
 
@@ -63,11 +63,10 @@ _TSTR Address::asString() const {
 }
 
 int Address::addCmp(Address* addPtr) {
-	int chsize = 0;
 	int chunks = 0;
 
-	if (getVersion() == 6) { chunks = 8; chsize = 16; }
-	else if (getVersion() == 4) { chunks = 4; chsize = 8; }
+	if (getVersion() == 6) { chunks = 8; }
+	else if (getVersion() == 4) { chunks = 4; }
 	else {
 		throw std::runtime_error("No valid version found for IP address range.\n");
 	}
