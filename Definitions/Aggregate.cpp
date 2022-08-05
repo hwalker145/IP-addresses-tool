@@ -81,8 +81,8 @@ size_t aggregateRanges(Book* b) {
 
 		for (i = 0; i < ranVec4.size() - 1; i++) {
 			if (ranVec4[i]->canMerge(ranVec4[i + 1])) {
-				std::cout << "Range: " << ranVec4[i]->asString() << " merges with Range: "
-						  << ranVec4[i + 1]->asString() << '\n';
+				//std::cout << "Range: " << ranVec4[i]->asString() << " merges with Range: "
+				//		  << ranVec4[i + 1]->asString() << '\n';
 
 				ranVec4.erase(ranVec4.begin() + i + 1);
 				ranVec4[i]->setMask(ranVec4[i]->getMask() - 1);

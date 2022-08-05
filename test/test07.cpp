@@ -21,7 +21,11 @@ int main(int argc, char** argv) {
 		std::cout << le.what() << '\n';
 		return 1;
 	}
-	catch (...) {
+	catch (std::runtime_error re) {
+		std::cout << re.what() << '\n';
 		return 2;
+	}
+	catch (...) {
+		return 3;
 	}
 }
