@@ -59,6 +59,7 @@ bool Range::canMerge(Range* ran) {
 	int chindex = -1;
 	int chunks = 0;
 	int chsize = 0;
+	int i = 0;
 
 	if (getAddress()->getVersion() == 6) { chunks = 8; chsize = 16; }
 	else if (getAddress()->getVersion() == 4) { chunks = 4; chsize = 8; }
@@ -67,6 +68,12 @@ bool Range::canMerge(Range* ran) {
 	}
 
 	chindex = (getMask() - 1) / chsize;
+
+	for (;i < chindex; i++) {
+		if (getAddress()->getChunk(i) != ran->getAddress()->getChunk(i)) {
+			return false;
+		}
+	}
 
 	if (((getAddress()->getChunk(chindex) >> (chsize - ((getMask() - 1) % chsize) - 1)) & (size_t)1) !=
 		((ran->getAddress()->getChunk(chindex) >> (chsize - ((getMask() - 1) % chsize) - 1)) & (size_t)1)) {

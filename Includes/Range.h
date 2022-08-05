@@ -35,6 +35,12 @@ public:
 
     Address* findMax();
 
+    _TSTR asString() {
+        _TOSTR ostr;
+        ostr << getAddress()->asString() << '/' << getMask();
+        return ostr.str();
+    }
+
     void setAddress(Address* add) {address = add;};
     // a wrapper to use on the generated address from Range::findMax
     // not 100p necessary I guess

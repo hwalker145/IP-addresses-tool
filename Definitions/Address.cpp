@@ -53,7 +53,6 @@ _TSTR Address::asString() const {
 	if (version == 4) { chunks = 4; del = _TPERIOD; }
 	else if (version == 6) { chunks = 8; del = _TCOLON; ostr << std::hex; }
 
-
 	for (int i = 0; i < chunks - 1; i++) {
 		ostr << address[i] << del;
 	}
@@ -72,7 +71,7 @@ int Address::addCmp(Address* addPtr) {
 	}
 
 	if(addPtr->getVersion() != getVersion()) {
-		throw std::logic_error("Comparing addresses of different versions. Exiting\n");
+		throw std::logic_error("Comparing addresses of different versions. Exiting . . .\n");
 	}
 
 	for(int i = 0; i < chunks; i++) {

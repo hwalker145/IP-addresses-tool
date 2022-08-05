@@ -8,4 +8,4 @@ using namespace libxl;
 
 bool comparator(Range*, Range*);
 
-void aggregateRanges(Book*);
+size_t aggregateRanges(Book*);

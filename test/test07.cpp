@@ -5,12 +5,23 @@ using namespace libxl;
 
 int main(int argc, char** argv) {
 		
-	// Book* B = xlCreateXMLBook();
-	// B->load("../xlsx/IP Address Range.xlsx");
+	try {
+		Book* B = xlCreateXMLBook();
 
-	std::cout << argv[0] << '\n';
+		size_t ctr;
 
-	// aggregateRanges(B);
+		if (B->load("xlsx\\IP Ranges Sample.xlsx")) {
 
-	return 0;
+			ctr = aggregateRanges(B);
+			B->release();
+		}
+		return 0;
+	}
+	catch (std::logic_error le) {
+		std::cout << le.what() << '\n';
+		return 1;
+	}
+	catch (...) {
+		return 2;
+	}
 }
