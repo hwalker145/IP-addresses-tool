@@ -2,7 +2,10 @@
 #define SETUP_H
 
 #include <string>
+#include <stdexcept>
 #include <sstream>
+#include <iostream>
+#include <iomanip>
 
 #ifdef _UNICODE
 typedef		wchar_t				_TCHAR;

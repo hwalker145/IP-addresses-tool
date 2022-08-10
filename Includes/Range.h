@@ -1,7 +1,6 @@
 #ifndef RANGE_H
 #define RANGE_H
 
-#include <cmath>
 #include "Address.h"
 
 class Range {
@@ -29,16 +28,16 @@ public:
         getline(istr, tempStr, _TSLASH);
         istr >> tempMsk;
 
-        setAddress(new Address(tempStr));
+        setAddress(new Address(tempStr.c_str()));
         setMask(tempMsk);
     }
 
     Address* findMax();
 
-    _TSTR asString() {
+    const _TCHAR* asString() {
         _TOSTR ostr;
         ostr << getAddress()->asString() << '/' << getMask();
-        return ostr.str();
+        return ostr.str().c_str();
     }
 
     void setAddress(Address* add) {address = add;};

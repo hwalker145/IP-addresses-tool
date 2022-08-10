@@ -8,11 +8,10 @@ int main(int argc, char** argv) {
 	try {
 		Book* B = xlCreateXMLBook();
 
-		size_t ctr;
-
 		if (B->load("xlsx\\IP Ranges Sample.xlsx")) {
 
-			ctr = aggregateRanges(B);
+			aggregateRanges(B);
+
 			B->release();
 		}
 		return 0;

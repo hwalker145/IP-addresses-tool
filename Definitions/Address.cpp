@@ -13,12 +13,12 @@
  * 
  * param str is the wstring
  */
-Address::Address(_TSTR str) {
+Address::Address(const _TCHAR* str) {
 	checkVersion(str);
 
 	int chunks = 0; 
 	int base = 0;
-	_TCHAR del = (_TCHAR)'\0';
+	_TCHAR del = (_TCHAR)NULL;
 
 	if (getVersion() == 4) { chunks = 4; del = '.'; base = 10; }
 	else if (getVersion() == 6) { chunks = 8; del = ':'; base = 16; }
@@ -29,14 +29,14 @@ Address::Address(_TSTR str) {
 	_TSTR temp;
 
 	for (int i = 0; i < chunks - 1; i++) {
-		getline(istr, temp, del);
-		address[i] = (size_t)stoi(temp, nullptr, base);
+		std::getline(istr, temp, del);
+		address[i] = (size_t)std::stoi(temp, nullptr, base);
 	}
 	getline(istr, temp);
-	address[chunks - 1] = (size_t)stoi(temp, nullptr, base);
+	address[chunks - 1] = (size_t)std::stoi(temp, nullptr, base);
 }
 
-_TSTR Address::asString() const {
+const _TCHAR* Address::asString() const {
 	#ifdef _UNICODE
 		constexpr _TCHAR _TCOLON = L':';
 		constexpr _TCHAR _TPERIOD = L'.';
@@ -58,7 +58,7 @@ _TSTR Address::asString() const {
 	}
 	ostr << address[chunks - 1];
 
-	return ostr.str();
+	return ostr.str().c_str();
 }
 
 int Address::addCmp(Address* addPtr) {

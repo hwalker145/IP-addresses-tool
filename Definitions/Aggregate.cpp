@@ -15,11 +15,17 @@ bool comparator(Range* a, Range* b) {
  * 
  * \param b -- book to search
  */
-size_t aggregateRanges(Book* b) {
+void aggregateRanges(Book* b) {
 	#ifdef _UNICODE
 		constexpr _TCHAR* _TSUBNET = L"Subnet";
+		constexpr _TCHAR* _V6HEADER = L"IPV6 Ranges";
+		constexpr _TCHAR* _V4HEADER = L"IPV4 Ranges";
+		constexpr _TCHAR* _SHEET = L"Aggregated Addresses";
 	#else 
 		constexpr _TCHAR* _TSUBNET = "Subnet";
+		constexpr _TCHAR* _V6HEADER = "IPV6 Ranges";
+		constexpr _TCHAR* _V4HEADER = "IPV4 Ranges";
+		constexpr _TCHAR* _SHEET = "Aggregated Addresses";
 	#endif
 
 
@@ -27,7 +33,6 @@ size_t aggregateRanges(Book* b) {
 	int subnetCol = -1;
 	int sheets = b->sheetCount();
 	int i = 0;
-	size_t ctr = 0;
 
 	std::vector<Range*> ranVec6;
 	std::vector<Range*> ranVec4;
@@ -47,11 +52,9 @@ size_t aggregateRanges(Book* b) {
 					if (!ran->isValid()) { continue; }
 
 					if (ran->getAddress()->getVersion() == 6) {
-						ctr += (1 << (128 - ran->getMask()));
 						ranVec6.push_back(ran);
 					}
 					else if (ran->getAddress()->getVersion() == 4) {
-						ctr += (1 << (32 - ran->getMask()));
 						ranVec4.push_back(ran);
 					}
 					else {
@@ -70,19 +73,8 @@ size_t aggregateRanges(Book* b) {
 	while (contLoop) {
 		contLoop = false;
 
-		//ctr = 0;
-		std::cout << "----------------------------------\n";
-		for (i = 0; i < ranVec4.size(); i++) {
-		    std::cout << ranVec4[i]->asString() << '\n';
-			//ctr += (1 << (32 - ranVec4[i]->getMask()));
-		}
-
-		//std::cout << ctr << '\n';
-
 		for (i = 0; i < ranVec4.size() - 1; i++) {
 			if (ranVec4[i]->canMerge(ranVec4[i + 1])) {
-				//std::cout << "Range: " << ranVec4[i]->asString() << " merges with Range: "
-				//		  << ranVec4[i + 1]->asString() << '\n';
 
 				ranVec4.erase(ranVec4.begin() + i + 1);
 				ranVec4[i]->setMask(ranVec4[i]->getMask() - 1);
@@ -90,5 +82,35 @@ size_t aggregateRanges(Book* b) {
 			}
 		}		
 	}
-	return ctr;
+
+	contLoop = true;
+
+	while (contLoop) {
+		contLoop = false;
+
+		for (i = 0; i < ranVec4.size() - 1; i++) {
+			if (ranVec4[i]->canMerge(ranVec4[i + 1])) {
+
+				ranVec4.erase(ranVec4.begin() + i + 1);
+				ranVec4[i]->setMask(ranVec4[i]->getMask() - 1);
+				contLoop = true;
+			}
+		}
+	}
+
+	Book* n = xlCreateXMLBook();
+	sh = n->addSheet(_SHEET);
+
+	sh->writeStr(0, 0, _V4HEADER);
+	sh->writeStr(0, 1, _V6HEADER);
+
+	for (i = 0; i < ranVec4.size(); i++) {
+		sh->writeStr(i + 1, 0, ranVec4[i]->asString());
+	}
+
+	for (i = 0; i < ranVec6.size(); i++) {
+		sh->writeStr(i + 1, 0, ranVec6[i]->asString());
+	}
+
+	return;
 }

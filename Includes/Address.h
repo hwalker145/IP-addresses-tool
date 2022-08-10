@@ -11,10 +11,6 @@
 
 #include "setup.h"
 
-#include <iostream>
-#include <cmath>
-#include <stdexcept>
-#include <iomanip>
 
 class Address {
 public:
@@ -24,9 +20,9 @@ public:
 		version = 0;
 	}
 
-	Address(_TSTR);
+	Address(const _TCHAR*);
 
-	_TSTR asString() const;
+	const _TCHAR* asString() const;
 
 	~Address()
 	{

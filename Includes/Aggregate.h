@@ -1,3 +1,6 @@
+#ifndef AGGREGATE_H
+#define	AGGREGATE_H
+
 #include "Range.h"
 #include "libxl.h"
 
@@ -7,5 +10,6 @@
 using namespace libxl;
 
 bool comparator(Range*, Range*);
+void aggregateRanges(Book*);
 
-size_t aggregateRanges(Book*);
+#endif
